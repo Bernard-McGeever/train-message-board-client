@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <th>Op. Code</th>
+    <th>Origin</th>
+    <th>Destination</th>
+    <th>Platform</th>
+    <th>STA</th>
+    <th>ETA</th>
+    <th>Status</th>
+  </tr>
+  <tr *ngFor="let trainService of currentArrivals.trainServices">
+    <td>{{ trainService.operatorCode }}</td>
+    <td>{{ trainService.origin[0].locationName }}</td>
+    <td>{{ trainService.destination[0].locationName }}</td>
+    <td>{{ trainService.platform }}</td>
+    <td>{{ trainService.sta }}</td>
+    <td [ngClass]="{'red': !(trainService.eta === 'On time'),
+                    'green': trainService.eta === 'On time'}">
+      {{ trainService.eta }}
+    </td>
+    <td [ngClass]="{'red': trainService.isCancelled,
+                    'green': !trainService.isCancelled}">
+      {{ trainService.isCancelled ? 'canceled' : 'running' }}
+    </td>
+  </tr>
+</table>
+

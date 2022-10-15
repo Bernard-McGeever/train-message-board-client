@@ -1,0 +1,35 @@
+@use "src/assets/styles/abstracts/color" as c;
+@use "src/assets/styles/abstracts/fonts" as f;
+
+table {
+  margin: 20px 20px 0 0;
+  table-layout: fixed;
+  width: 100%;
+
+  font-family: f.$train-font;
+
+  th {
+    color: c.$text-heading-color;
+    text-shadow: c.$text-heading-glow;
+    background-color: c.$bg-text-display;
+    font-size: larger;
+    text-align: left;
+  }
+
+  td{
+    font-size: large;
+    color: c.$text-color;
+    text-shadow: c.$text-color-glow;
+    background-color: c.$bg-text-display;
+  }
+
+  .red {
+    color: c.$text-color-neg;
+    text-shadow: c.$text-color-neg-glow;
+  }
+
+  .green {
+    color: c.$text-color-pos;
+    text-shadow: c.$text-color-pos-glow;
+  }
+}
