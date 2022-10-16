@@ -16,6 +16,12 @@ table {
     text-align: left;
   }
 
+  tr:hover td {
+    background-color: c.$bg-text-display-hover;
+    color: c.$text-color-hover;
+    cursor: pointer;
+  }
+
   td{
     font-size: large;
     color: c.$text-color;

@@ -8,7 +8,7 @@
     <th>ETA</th>
     <th>Status</th>
   </tr>
-  <tr *ngFor="let trainService of currentArrivals.trainServices">
+  <tr class="service" *ngFor="let trainService of currentArrivals?.trainServices">
     <td>{{ trainService.operatorCode }}</td>
     <td>{{ trainService.origin[0].locationName }}</td>
     <td>{{ trainService.destination[0].locationName }}</td>

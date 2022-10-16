@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import { AppRoutingModule } from '../../app-routing.module';
 import {BoardType} from "../../models/Board.enum";
 import {ApplicationSettingsService} from "../../service/application/application-settings.service";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
@@ -31,6 +30,12 @@ export class BoardPickerComponent implements OnInit {
 
   public showHideBoardOptions(): void {
     this.dropDownIsShown = !this.dropDownIsShown;
+  }
+
+  public convertBoardOptionToLink(option: BoardType): string {
+    const link = '/' + option.toLowerCase().replace('_', '-');
+    console.log(link)
+    return '/' + option.toLowerCase().replace('_', '-');
   }
 
   private populateBoardOptions(): void {

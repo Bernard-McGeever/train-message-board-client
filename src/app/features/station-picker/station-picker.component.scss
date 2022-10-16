@@ -4,20 +4,49 @@
 :host {
   position: absolute;
   bottom: 0;
-  left: 0;
-  top: 20px;
-  right: 400px;
+  left: 5px;
+  top: 18px;
+  right: 1510px;
 }
 
-h1 {
-  display: inline-block;
-  vertical-align: middle;
-  padding: 5px 5px 5px 5px;
-
-  font-size: xx-large;
-  font-family: f.$train-font;
-
+button {
   color: c.$text-color;
   text-shadow: c.$text-color-glow;
   background-color: c.$bg-text-display;
+  font-size: xx-large;
+  font-family: f.$train-font;
+  width: 100%;
+  height: 50px;
+
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: c.$text-color-hover;
+    background-color: c.$bg-text-display-hover;
+  }
+}
+
+.picker-drop-down {
+  z-index: 1;
+  background-color: c.$bg-text-display;
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    color: c.$text-color;
+    text-shadow: c.$text-color-glow;
+    list-style-type: none;
+    font-family: f.$train-font;
+    padding: 5px 0 5px 5px;
+
+    &:hover {
+      background-color: c.$bg-text-display-hover;
+      color: c.$text-color-hover;
+      cursor: pointer;
+    }
+  }
 }

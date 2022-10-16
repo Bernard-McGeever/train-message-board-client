@@ -1,1 +1,7 @@
-<h1>{{ currentStation }}</h1>
+<button (click)="showHideStationOptions()">{{ currentStation.stationName }}</button>
+<div class="picker-drop-down" *ngIf="this.dropDownIsShown">
+  <ul *ngFor="let option of stationOptions">
+    <li (click)="onStationOptionClicked(option)">{{ option.stationName }}</li>
+  </ul>
+</div>
+

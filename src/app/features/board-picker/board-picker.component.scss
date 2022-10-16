@@ -15,10 +15,15 @@ button {
   background-color: c.$bg-text-display;
   font-size: large;
   font-family: f.$train-font;
-  width: 281px;
+  width: 100%;
 
   padding: 5px 5px 5px 5px;
   cursor: pointer;
+
+  &:hover {
+    color: c.$text-color-hover;
+    background-color: c.$bg-text-display-hover;
+  }
 }
 
 .picker-drop-down {
@@ -40,6 +45,7 @@ button {
     &:hover {
       background-color: c.$bg-text-display-hover;
       color: c.$text-color-hover;
+      cursor: pointer;
     }
   }
 }
