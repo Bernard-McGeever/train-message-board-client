@@ -24,6 +24,7 @@ import {
   MOCK_DEPARTURES_AND_ARRIVALS_EDB, MOCK_DEPARTURES_AND_ARRIVALS_EUS,
   MOCK_DEPARTURES_AND_ARRIVALS_GLC, MOCK_DEPARTURES_AND_ARRIVALS_MKC, MOCK_DEPARTURES_AND_ARRIVALS_PAD
 } from "../../mocks/mock-departures-and-arrivals-responces";
+import {MOCK_SERVICE} from "../../mocks/mock-service-responce";
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +112,9 @@ export class HuxleyTwoService {
       BoardType.DEPARTURES,
       BoardType.ARRIVALS
     ];
+  }
+
+  public getService(serviceIdUrlSafe: string) {
+    return MOCK_SERVICE;
   }
 }

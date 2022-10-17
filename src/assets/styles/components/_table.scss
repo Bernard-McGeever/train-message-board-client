@@ -1,0 +1,42 @@
+@use "src/assets/styles/abstracts" as a;
+
+@mixin importTableStyles() {
+  table {
+    margin: 20px 20px 0 0;
+    table-layout: fixed;
+    width: 100%;
+
+    font-family: a.$train-font;
+
+    th {
+      color: a.$text-heading-color;
+      text-shadow: a.$text-heading-glow;
+      background-color: a.$bg-text-display;
+      font-size: larger;
+      text-align: left;
+    }
+
+    tr:hover td {
+      background-color: a.$bg-text-display-hover;
+      color: a.$text-color-hover;
+      cursor: pointer;
+    }
+
+    td{
+      font-size: large;
+      color: a.$text-color;
+      text-shadow: a.$text-color-glow;
+      background-color: a.$bg-text-display;
+    }
+
+    .red {
+      color: a.$text-color-neg;
+      text-shadow: a.$text-color-neg-glow;
+    }
+
+    .green {
+      color: a.$text-color-pos;
+      text-shadow: a.$text-color-pos-glow;
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApplicationSettingsService} from "../../service/application/application-settings.service";
+import {ApplicationSettingsService} from "../../core/services/application-settings/application-settings.service";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
 import {StationNameMap} from "../../models/CRS";
 

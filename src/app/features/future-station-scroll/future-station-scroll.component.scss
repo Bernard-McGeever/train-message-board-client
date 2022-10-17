@@ -1,0 +1,19 @@
+@use "src/assets/styles/abstracts/color" as c;
+@use "src/assets/styles/abstracts/fonts" as f;
+
+h1 {
+  font-size: medium;
+  font-family: f.$train-font;
+  color: c.$text-color;
+  overflow: hidden;
+  animation: scrolling-text 45s linear infinite;
+}
+
+@keyframes scrolling-text {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}

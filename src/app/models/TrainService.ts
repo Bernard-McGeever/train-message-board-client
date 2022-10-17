@@ -1,32 +1,29 @@
-import {Station} from "./Station";
 import {Formation} from "./Formation";
+import {CallingPoints} from "./CallingPoints";
 
 export interface TrainService {
-  formation: Formation | null;
-  origin: Station[];
-  destination: Station[];
-  currentOrigins: Station[] | null;
-  currentDestinations: Station[] | null;
-  rsid: string | null; // ?
-  serviceIdPercentEncoded: string;
-  serviceIdGuid: string;
-  serviceIdUrlSafe: string;
-  sta: string | null; // time 'HH:mm'
-  eta: string | null; // time 'HH:mm'
-  std: string | null; // time 'HH:mm'
-  etd: string | null; // time 'HH:mm'
-  platform: string | null;
-  operator: string
-  operatorCode: string;
-  isCircularRoute: boolean;
-  isCancelled: boolean;
-  filterLocationCancelled: boolean;
+  formation: Formation;
+  previousCallingPoints: CallingPoints[] | null;
+  subsequentCallingPoints: CallingPoints[];
+  generatedAt: string;
   serviceType: number;
+  locationName: string;
+  crs: string;
+  operator: string;
+  operatorCode: string;
+  rsid: string;
+  isCancelled: boolean;
+  cancelReason: string | null;
+  delayReason: string | null;
+  overdueMessage: string | null;
   length: number;
   detachFront: boolean;
   isReverseFormation: boolean;
-  cancelReason: string | null;
-  delayReason: string | null;
-  serviceID: string;
-  adhocAlerts: string | null; // ?
+  platform: string;
+  sta: string | null;
+  eta: string | null;
+  ata: string | null;
+  std: string | null;
+  etd: string | null;
+  atd: string | null;
 }

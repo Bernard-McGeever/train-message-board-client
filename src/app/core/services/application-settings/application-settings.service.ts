@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
-import {StationNameMap} from "../../models/CRS";
-import {BoardType} from "../../models/Board.enum";
+import {StationNameMap} from "../../../models/CRS";
+import {BoardType} from "../../../models/Board.enum";
 
 @Injectable({
   providedIn: 'root'

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BoardType} from "../../models/Board.enum";
-import {ApplicationSettingsService} from "../../service/application/application-settings.service";
+import {ApplicationSettingsService} from "../../core/services/application-settings/application-settings.service";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
 
 @Component({

@@ -1,10 +1,10 @@
-import {TrainService} from "./TrainService";
+import {Service} from "./Service";
 import {NRCCMessages} from "./NRCCMessages";
 
 export interface HuxleyTwoGetResponse {
-  trainServices: TrainService[];
-  busServices: TrainService[] | null;
-  ferryServices: TrainService[] | null;
+  trainServices: Service[];
+  busServices: Service[] | null;
+  ferryServices: Service[] | null;
   generatedAt: string; // DateTime
   locationName: string;
   crs: string;

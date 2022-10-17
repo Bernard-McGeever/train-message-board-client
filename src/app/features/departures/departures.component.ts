@@ -1,37 +1,24 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HuxleyTwoGetResponse} from "../../models/HuxleyTwoGetResponse";
-import {ApplicationSettingsService} from "../../service/application/application-settings.service";
-import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
-import {CRS, StationNameMap} from "../../models/CRS";
-import {Subscription} from "rxjs";
+import { Component } from '@angular/core';
+import { ApplicationSettingsService } from "../../core/services/application-settings/application-settings.service";
+import { HuxleyTwoService } from "../../service/huxley-two/huxley-two.service";
+import { BaseTableComponent } from "../base/base-table.component";
+import {StationNameMap} from "../../models/CRS";
+import {SharedService} from "../../core/services/shared/shared.service";
 
 @Component({
   selector: 'app-departures',
   templateUrl: './departures.component.html',
   styleUrls: ['./departures.component.scss']
 })
-export class DeparturesComponent implements OnInit, OnDestroy {
+export class DeparturesComponent extends BaseTableComponent {
 
-  public currentDepartures: HuxleyTwoGetResponse | null = null;
-
-  private crs: StationNameMap | null = null;
-  private subscriptions: Subscription[] = [];
-
-  constructor(private settings: ApplicationSettingsService, private huxleyTwoService: HuxleyTwoService) { }
-
-  ngOnInit(): void {
-    this.crs = this.settings.currentCRS;
-    this.subscriptions.push(this.settings.subscribeToCRS((crs: StationNameMap) => {
-      this.crs = crs;
-      this.populateCurrentDepartures(this.crs);
-    }));
+  constructor(_settings: ApplicationSettingsService, _shared: SharedService, _huxleyTwoService: HuxleyTwoService) {
+    super(_settings, _shared, _huxleyTwoService);
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
-  }
-
-  private populateCurrentDepartures(crs: StationNameMap) {
-    this.currentDepartures = this.huxleyTwoService.getDepartures(crs);
+  populateCurrentServices(crs: StationNameMap): void {
+    this.currentServices = this.huxleyTwoService.getDepartures(crs)?.trainServices.map(service => {
+      return BaseTableComponent.convertTrainServiceToWrapper(service);
+    });
   }
 }
