@@ -11,7 +11,7 @@ export class ApplicationSettingsService {
   // @ts-ignore
   private crsSubject = new BehaviorSubject<StationNameMap>(null);
 
-  private themeSubject = new BehaviorSubject<ThemeType>(ThemeType.LIGHT);
+  private themeSubject = new BehaviorSubject<ThemeType>(ThemeType.CLASSIC);
 
   constructor() {
     this.subscribeToSettingChanges();

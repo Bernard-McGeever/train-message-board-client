@@ -15,19 +15,6 @@
     --text-heading-color: #{c.$text-heading-color-dark};
   }
 
-  :host-context( .theme-light ) {
-    // Font
-    --train-font: #{f.$train-font};
-
-    // Background Colors
-    --bg-color: #{c.$bg-color-light};
-    --bg-text-display: #{c.$bg-text-display-light};
-
-    // Text Colors
-    --text-color: #{c.$text-color-light};
-    --text-heading-color: #{c.$text-heading-color-light};
-  }
-
   :host-context( .theme-classic ) {
     // Font
     --train-font: #{f.$train-font};

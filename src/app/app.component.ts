@@ -8,7 +8,6 @@ import {ThemeType} from "./features/admin-menu/models/theme-type.enum";
   styleUrls: ['./app.component.scss'],
   host: {
     "[class.theme-dark]": " (theme === 'dark')",
-    "[class.theme-light]": " (theme === 'light')",
     "[class.theme-classic]": " (theme === 'classic')"
   }
 })
@@ -28,9 +27,6 @@ export class AppComponent implements OnInit {
         break;
       case ThemeType.DARK:
         this.theme = 'dark';
-        break;
-      case ThemeType.LIGHT:
-        this.theme = 'light';
         break;
     }
   }

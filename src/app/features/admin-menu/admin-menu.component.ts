@@ -10,7 +10,7 @@ import {ApplicationSettingsService} from "../../core/services/application-settin
 export class AdminMenuComponent implements OnInit {
   public isAdminMenuShown: boolean = false;
 
-  public currentTheme: ThemeType = ThemeType.LIGHT;
+  public currentTheme: ThemeType = ThemeType.CLASSIC;
   public themeType = ThemeType;
 
   constructor(private settings: ApplicationSettingsService) { }
