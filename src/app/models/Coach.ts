@@ -1,6 +1,6 @@
 import {Toilet} from "./Toilet";
 
-export interface Coaches {
+export interface Coach {
   coachClass: string;
   toilet: Toilet | null,
   loading: number;

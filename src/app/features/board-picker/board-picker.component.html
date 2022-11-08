@@ -1,6 +1,6 @@
-<button (click)="showHideBoardOptions()">{{ currentBoard }}</button>
+<button (click)="showHideOptions()">{{ this.currentBoard }}</button>
 <div class="picker-drop-down" *ngIf="this.dropDownIsShown">
-  <ul *ngFor="let option of boardOptions">
+  <ul *ngFor="let option of options">
     <li (click)="onBoardOptionClicked(option)" routerLink="{{convertBoardOptionToLink(option)}}">{{ option }}</li>
   </ul>
 </div>

@@ -1,12 +1,4 @@
-@use "src/assets/styles/abstracts/color" as c;
-@use "src/assets/styles/abstracts/fonts" as f;
+@use "src/assets/styles/components" as c;
 
-h1 {
-  color: c.$text-color;
-  font-size: x-small;
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  top: 20%;
-  left: 20%
-}
+@include c.importTableStyles();
+@include c.importModalStyles();

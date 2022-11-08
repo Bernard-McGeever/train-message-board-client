@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
 import {StationNameMap} from "../../../models/CRS";
-import {BoardType} from "../../../models/Board.enum";
+import {ThemeType} from "../../../features/admin-menu/models/theme-type.enum";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ApplicationSettingsService {
   // @ts-ignore
   private crsSubject = new BehaviorSubject<StationNameMap>(null);
 
-  private boardSubject = new BehaviorSubject<BoardType>(BoardType.DEPARTURES_AND_ARRIVALS);
+  private themeSubject = new BehaviorSubject<ThemeType>(ThemeType.LIGHT);
 
   constructor() {
     this.subscribeToSettingChanges();
@@ -19,14 +19,14 @@ export class ApplicationSettingsService {
 
   private subscribeToSettingChanges() {
     this.currentCRS;
-    this.currentBoard;
+    this.currentTheme;
 
     window.addEventListener('storage', (event: StorageEvent) => {
       if (event.key === 'crs') {
         this.setCRS();
       }
-      if (event.key === 'board') {
-        this.setBoard;
+      if (event.key === 'theme') {
+        this.setTheme();
       }
     });
   }
@@ -41,19 +41,24 @@ export class ApplicationSettingsService {
     return crs;
   }
 
-  public get currentBoard(): BoardType {
-    let boardString = localStorage.getItem('board');
+  public get currentTheme(): ThemeType {
+    let themeString = localStorage.getItem('theme');
     // @ts-ignore
-    const board = boardString ? BoardType[localStorage.getItem('board')] : BoardType.DEPARTURES_AND_ARRIVALS;
+    const theme = themeString ? ThemeType[localStorage.getItem('theme')] : ThemeType.LIGHT;
 
-    if (!boardString) {
-      localStorage.setItem('board', board);
+    if (!this.themeSubject.value || this.themeSubject.value !== theme) {
+      this.themeSubject.next(theme);
     }
 
-    if (!this.boardSubject.value || this.boardSubject.value !== board) {
-      this.boardSubject.next(board);
+    if (!themeString) {
+      localStorage.setItem('theme', theme);
     }
-    return board;
+
+    if (!this.themeSubject || this.themeSubject !== theme) {
+      this.themeSubject.next(theme);
+    }
+
+    return theme;
   }
 
   public set currentCRS(crs: StationNameMap) {
@@ -66,19 +71,29 @@ export class ApplicationSettingsService {
     localStorage.setItem('crs', JSON.stringify(crs.toJSON()));
   }
 
-  public set currentBoard(board: BoardType) {
-    if (this.boardSubject.value !== board) {
-      this.boardSubject.next(board);
+  public set currentTheme(theme: ThemeType) {
+    if (this.themeSubject.value !== theme) {
+      this.themeSubject.next(theme);
     }
-    localStorage.setItem('board', board);
+    localStorage.setItem('theme', theme);
+  }
+
+  private setTheme() {
+    const themeString = localStorage.getItem('theme');
+    // @ts-ignore
+    const theme = themeString ? ThemeType[themeString] : ThemeType.LIGHT;
+
+    if (!this.themeSubject || this.themeSubject !== theme) {
+      this.themeSubject.next(theme);
+    }
   }
 
   public subscribeToCRS(next: (crs: StationNameMap) => void): Subscription {
     return this.crsSubject.subscribe(next);
   }
 
-  public subscribeToBoard(next: (boardType: BoardType) => void): Subscription {
-    return this.boardSubject.subscribe(next);
+  public subscribeToTheme(next: (themeType: ThemeType) => void): Subscription {
+    return this.themeSubject.subscribe(next);
   }
 
   private setCRS(): void {
@@ -86,16 +101,6 @@ export class ApplicationSettingsService {
     const crs = !crsString ? new StationNameMap() : StationNameMap.fromJS(JSON.parse(crsString));
     if (!this.crsSubject.value || this.crsSubject.value !== crs) {
       this.crsSubject.next(crs);
-    }
-  }
-
-  private setBoard(): void {
-    const boardString = localStorage.getItem('board');
-    // @ts-ignore
-    const board = boardString ? BoardType[boardString] : BoardType.DEPARTURES_AND_ARRIVALS;
-
-    if (!this.boardSubject || this.boardSubject !== board) {
-      this.boardSubject.next(board);
     }
   }
 }

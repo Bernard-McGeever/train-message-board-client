@@ -1,0 +1,12 @@
+@mixin clickable($bg-color, $fg-color) {
+  background-color: $bg-color;
+  color: $fg-color;
+  &:hover {
+    filter: brightness(80%);
+    cursor: pointer;
+  }
+}
+
+@mixin button() {
+  cursor: pointer;
+}

@@ -1,14 +1,37 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ApplicationSettingsService} from "./core/services/application-settings/application-settings.service";
+import {ThemeType} from "./features/admin-menu/models/theme-type.enum";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  host: {
+    "[class.theme-dark]": " (theme === 'dark')",
+    "[class.theme-light]": " (theme === 'light')",
+    "[class.theme-classic]": " (theme === 'classic')"
+  }
 })
-export class AppComponent {
-  public selectedServiceId: string | null = null;
+export class AppComponent implements OnInit {
+  public theme = ''
 
-  public setSelectedServiceId(serviceId: string) {
-    this.selectedServiceId = serviceId;
+  constructor(private settings: ApplicationSettingsService) { }
+
+  ngOnInit(): void {
+    this.settings.subscribeToTheme(themeType => this.applyTheme(themeType));
+  }
+
+  private applyTheme(themeType: ThemeType): void {
+    switch (themeType) {
+      case ThemeType.CLASSIC:
+        this.theme = 'classic';
+        break;
+      case ThemeType.DARK:
+        this.theme = 'dark';
+        break;
+      case ThemeType.LIGHT:
+        this.theme = 'light';
+        break;
+    }
   }
 }

@@ -1,7 +1,7 @@
-import {Coaches} from "./Coaches";
+import {Coach} from "./Coach";
 
 export interface Formation {
     avgLoading: number,
     avgLoadingSpecified: boolean,
-    coaches: Coaches[];
+    coaches: Coach[];
 }

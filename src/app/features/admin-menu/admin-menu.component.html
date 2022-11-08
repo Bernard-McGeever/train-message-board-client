@@ -1,0 +1,9 @@
+<mat-icon class="admin-menu-icon" (click)="onAdminMenuClicked($event)">account_circle</mat-icon>
+<div *ngIf="isAdminMenuShown">
+  <h1>THEME:</h1>
+  <ul>
+    <li *ngIf="currentTheme !== themeType.LIGHT" (click)="onThemeClicked(themeType.LIGHT)">Light</li>
+    <li *ngIf="currentTheme !== themeType.DARK" (click)="onThemeClicked(themeType.DARK)">Dark</li>
+    <li *ngIf="currentTheme !== themeType.CLASSIC" (click)="onThemeClicked(themeType.CLASSIC)">Classic</li>
+  </ul>
+</div>

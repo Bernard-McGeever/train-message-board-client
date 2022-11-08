@@ -37,10 +37,16 @@ export class FutureStationScrollComponent implements OnInit {
   }
 
   private static getServiceStops(service: TrainService): string {
-    return 'Hayes and Harlington';
+    let callingPointsLocName: string[] = [];
+    service.subsequentCallingPoints.forEach(subCallingPoint => {
+      subCallingPoint.callingPoint.forEach(cPoint => {
+        callingPointsLocName.push(cPoint.locationName);
+      });
+    });
+    return callingPointsLocName.join(", ");
   }
 
-  private static getNumberOfCoaches(service: TrainService): string {
-    return '5';
+  private static getNumberOfCoaches(service: TrainService): number {
+    return service.formation.coaches.length;
   }
 }

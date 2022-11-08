@@ -9,9 +9,11 @@ import { ArrivalsComponent } from './features/arrivals/arrivals.component';
 import { SearchComponent } from './features/search/search.component';
 import { BoardPickerComponent } from './features/board-picker/board-picker.component';
 import { StationPickerComponent } from './features/station-picker/station-picker.component';
-import { NavBarComponent } from './features/nav-bar/nav-bar.component';
 import { MoreServiceInformationComponent } from './features/more-service-information/more-service-information.component';
 import { FutureStationScrollComponent } from './features/future-station-scroll/future-station-scroll.component';
+import { AdminMenuComponent } from './features/admin-menu/admin-menu.component';
+import {MatIconModule} from "@angular/material/icon";
+import { InformationModalComponent } from './shared/modals/information-modal/information-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +24,15 @@ import { FutureStationScrollComponent } from './features/future-station-scroll/f
     SearchComponent,
     BoardPickerComponent,
     StationPickerComponent,
-    NavBarComponent,
     MoreServiceInformationComponent,
     FutureStationScrollComponent,
+    AdminMenuComponent,
+    InformationModalComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

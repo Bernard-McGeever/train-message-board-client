@@ -1,6 +1,11 @@
 @use "src/assets/styles/abstracts" as a;
 
-@mixin importTableStyles() {
+@mixin importClickableTableStyles() {
+  nav {
+    position: relative;
+    height: 55px;
+  }
+
   table {
     margin: 20px 20px 0 0;
     table-layout: fixed;
@@ -9,34 +14,40 @@
     font-family: a.$train-font;
 
     th {
-      color: a.$text-heading-color;
-      text-shadow: a.$text-heading-glow;
-      background-color: a.$bg-text-display;
+      color: var(--text-heading-color);
+      background-color: var(--bg-text-display);
       font-size: larger;
       text-align: left;
     }
 
-    tr:hover td {
-      background-color: a.$bg-text-display-hover;
-      color: a.$text-color-hover;
-      cursor: pointer;
+    tr {
+      @include a.clickable(var(--bg-text-display), var(--text-color));
     }
 
     td{
       font-size: large;
-      color: a.$text-color;
-      text-shadow: a.$text-color-glow;
-      background-color: a.$bg-text-display;
+    }
+  }
+}
+
+@mixin importTableStyles() {
+  table {
+    table-layout: fixed;
+    width: 100%;
+
+    font-family: a.$train-font;
+
+    th {
+      color: var(--text-heading-color);
+      background-color: var(--bg-text-display);
+      font-size: medium;
+      text-align: left;
     }
 
-    .red {
-      color: a.$text-color-neg;
-      text-shadow: a.$text-color-neg-glow;
-    }
-
-    .green {
-      color: a.$text-color-pos;
-      text-shadow: a.$text-color-pos-glow;
+    td{
+      font-size: medium;
+      color: var(--text-color);
+      background-color: var(--bg-text-display);
     }
   }
 }

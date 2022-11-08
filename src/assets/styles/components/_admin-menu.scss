@@ -1,0 +1,50 @@
+@use "src/assets/styles/abstracts" as a;
+
+@mixin importAdminMenuStyles() {
+  :host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3%;
+    z-index: 1;
+  }
+
+  .admin-menu-icon {
+    @include a.clickable(var(--bg-color), var(--text-heading-color));
+
+    float: right;
+    padding: 5px;
+    display: block;
+    transform: scale(1.4);
+  }
+
+  div {
+    position: absolute;
+    right: 2px;
+    top: 35px;
+    font-size: medium;
+    background-color: #393939;
+    width: 200px;
+    padding: 5px;
+
+    h1 {
+      font-size: medium;
+      border-bottom: black 2px solid;
+      padding-bottom: 5px;
+      color: #d7d7d7;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        @include a.clickable(var(--bg-text-display), var(--text-color));
+
+        font-size: small;
+        margin: 2px;
+      }
+    }
+  }
+}

@@ -4,20 +4,20 @@ import {Formation} from "../../../models/Formation";
 
 export class TrainServiceWrapper {
   delayReason: string | null;
-  destination: Station[];
+  destination: string;
   eta: string | null;
   etd: string | null;
   isCancelled: boolean;
   operatorCode: string;
-  origin: Station[];
+  origin: string;
   platform: string | null;
   serviceIdUrlSafe: string;
   sta: string | null;
   std: string | null;
   moreInfoShown: boolean;
 
-  constructor(delayReason: string | null, destination: Station[], eta: string | null, etd: string | null, isCancelled: boolean, operatorCode: string,
-              origin: Station[], platform: string | null, serviceIdUrlSafe: string, sta: string | null, std: string | null, moreInfoShown: boolean) {
+  constructor(delayReason: string | null, destination: string, eta: string | null, etd: string | null, isCancelled: boolean, operatorCode: string,
+              origin: string, platform: string | null, serviceIdUrlSafe: string, sta: string | null, std: string | null, moreInfoShown: boolean) {
     this.delayReason = delayReason;
     this.destination = destination;
     this.eta = eta;

@@ -1,15 +1,15 @@
 // Background Colors
-$bg-color: black;
-$bg-text-display: #393939;
-$bg-text-display-hover: #262626;
+$bg-color-classic: black;
+$bg-text-display-classic: #393939;
+$bg-color-light: white;
+$bg-text-display-light: #393939;
+$bg-color-dark: blue;
+$bg-text-display-dark: #393939;
 
 // Text Colors
-$text-color: #e0aa23;
-$text-color-hover: #f8c132;
-$text-color-glow: 2px 2px 3px rgba(224,170,35,0.35);
-$text-color-pos: #098d09;
-$text-color-pos-glow: 2px 2px 2px rgba(5,118,5,0.35);
-$text-color-neg: #cb0202;
-$text-color-neg-glow: 2px 2px 2px rgba(203,2,2,0.35);
-$text-heading-color: #d7d7d7;
-$text-heading-glow: 2px 2px 2px rgba(215,215,215,0.35)
+$text-color-classic: #e0aa23;
+$text-heading-color-classic: #f3f3f3;
+$text-color-light: black;
+$text-heading-color-light: grey;
+$text-color-dark: white;
+$text-heading-color-dark: grey;
