@@ -5,10 +5,10 @@ import {DeparturesComponent} from "./features/departures/departures.component";
 import {ArrivalsComponent} from "./features/arrivals/arrivals.component";
 
 const routes: Routes = [
-  { path: 'departures-and_arrivals', component: DeparturesAndArrivalsComponent },
+  { path: 'departures-and-arrivals', component: DeparturesAndArrivalsComponent },
   { path: 'departures', component: DeparturesComponent },
   { path: 'arrivals', component: ArrivalsComponent },
-  { path: '', redirectTo: '/departures-and_arrivals', pathMatch: 'full' }
+  { path: '', redirectTo: '/departures-and-arrivals', pathMatch: 'full' }
 ];
 
 @NgModule({

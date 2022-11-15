@@ -25,13 +25,14 @@ import {
   MOCK_DEPARTURES_AND_ARRIVALS_GLC, MOCK_DEPARTURES_AND_ARRIVALS_MKC, MOCK_DEPARTURES_AND_ARRIVALS_PAD
 } from "../../mocks/mock-departures-and-arrivals-responces";
 import {MOCK_SERVICE} from "../../mocks/mock-service-responce";
+import {CrsApiService} from "../../core/services/gateway/CrsApi/crs-api.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HuxleyTwoService {
 
-  constructor() { }
+  constructor(private crsApi: CrsApiService) { }
 
   public getArrivals(station: StationNameMap)  {
     switch (station.crsCode) {
@@ -100,6 +101,10 @@ export class HuxleyTwoService {
       default:
         return null;
     }
+  }
+
+  public getCRSOptionsAPI() {
+    return this.crsApi.getCrs();
   }
 
   public getCRSOptions() {
