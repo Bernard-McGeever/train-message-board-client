@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { TrainServiceWrapper } from "../model/train-service-wrapper";
-import { StationNameMap } from "../../../models/CRS";
 import { Subscription } from "rxjs";
 import { ApplicationSettingsService } from "../../../core/services/application-settings/application-settings.service";
 import { HuxleyTwoService } from "../../../service/huxley-two/huxley-two.service";
-import { Service } from "../../../models/Service";
 import { SharedService } from "../../../core/services/shared/shared.service";
+import {CRS} from "../../../core/services/gateway/CrsApi/crs-api.service";
+import {IService} from "../../../core/services/gateway/DeparturesAndArrivalsApi/departures-and-arrivals-api";
 
 @Component(
   {
@@ -18,8 +18,8 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
   public currentServices?: TrainServiceWrapper[];
   public filteredServices?: TrainServiceWrapper[];
 
-  private crs: StationNameMap | null = null;
-  private subscriptions: Subscription[] = [];
+  private crs: CRS | null = null;
+  protected subscriptions: Subscription[] = [];
 
   protected constructor(public settings: ApplicationSettingsService, public shared: SharedService, public huxleyTwoService: HuxleyTwoService) { }
 
@@ -27,7 +27,7 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
     this.populateProperties();
 
     this.crs = this.settings.currentCRS;
-    this.subscriptions.push(this.settings.subscribeToCRS((crs: StationNameMap) => {
+    this.subscriptions.push(this.settings.subscribeToCRS((crs: CRS) => {
       this.crs = crs;
       this.populateCurrentServices(this.crs);
     }));
@@ -46,11 +46,11 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
     this.shared.setService(service.serviceIdUrlSafe);
   }
 
-  abstract populateCurrentServices(crs: StationNameMap): void;
+  abstract populateCurrentServices(crs: CRS): void;
 
   abstract populateProperties(): void;
 
-  public static convertTrainServiceToWrapper(service: Service): TrainServiceWrapper {
+  public static convertTrainServiceToWrapper(service: IService): TrainServiceWrapper {
     return new TrainServiceWrapper(
       service.delayReason,
       service.destination[0].locationName,

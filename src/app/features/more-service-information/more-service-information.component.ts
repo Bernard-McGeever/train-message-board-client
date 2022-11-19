@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {SharedService} from "../../core/services/shared/shared.service";
 import {Subscription} from "rxjs";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
-import {TrainService} from "../../models/TrainService";
+import {TrainService} from "../../core/services/gateway/ServicesApi/services-api.service";
 
 @Component({
   selector: 'app-more-service-information',
@@ -16,6 +16,7 @@ export class MoreServiceInformationComponent implements OnInit {
   public data?: any[];
 
   private serviceIdUrlSafeSubscription: Subscription;
+  private subscriptions: Subscription[] = [];
 
   constructor(private shared: SharedService, private huxleyTwoService: HuxleyTwoService) {
     this.serviceIdUrlSafeSubscription = shared.subscribeToServiceIdUrlSafeSubject((url: string) => {
@@ -34,7 +35,9 @@ export class MoreServiceInformationComponent implements OnInit {
   }
 
   public initTrainService(url: string) {
-    this.trainService = this.huxleyTwoService.getService(url);
+    this.subscriptions.push(this.huxleyTwoService.getService(url).subscribe((trainService: TrainService) => {
+      this.trainService = trainService;
+    }));
   }
 
   public populateData(service: TrainService | undefined) {
@@ -46,6 +49,7 @@ export class MoreServiceInformationComponent implements OnInit {
   }
 
   public removeTrainService() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.trainService = undefined;
   }
 }

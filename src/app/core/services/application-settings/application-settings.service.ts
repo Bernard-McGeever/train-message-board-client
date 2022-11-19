@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Subscription} from "rxjs";
-import {StationNameMap} from "../../../models/CRS";
 import {ThemeType} from "../../../features/admin-menu/models/theme-type.enum";
+import {CRS} from "../gateway/CrsApi/crs-api.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,7 @@ export class ApplicationSettingsService {
   // @ts-ignore
   private crsSubject = new BehaviorSubject<StationNameMap>(null);
 
-  private themeSubject = new BehaviorSubject<ThemeType>(ThemeType.CLASSIC);
+  private themeSubject = new BehaviorSubject<ThemeType>(ThemeType.DARK);
 
   constructor() {
     this.subscribeToSettingChanges();
@@ -31,9 +31,9 @@ export class ApplicationSettingsService {
     });
   }
 
-  public get currentCRS(): StationNameMap {
+  public get currentCRS(): CRS {
     const crsString = localStorage.getItem('crs');
-    const crs = !crsString ? new StationNameMap() : StationNameMap.fromJS(JSON.parse(crsString));
+    const crs = !crsString ? new CRS() : CRS.fromJS(JSON.parse(crsString));
 
     if (!this.crsSubject.value || JSON.stringify(this.crsSubject.value.toJSON()) !== crsString) {
       this.crsSubject.next(crs);
@@ -61,9 +61,9 @@ export class ApplicationSettingsService {
     return theme;
   }
 
-  public set currentCRS(crs: StationNameMap) {
+  public set currentCRS(crs: CRS) {
     if (this.crsSubject.value !== crs) {
-      const updatedCRS = new StationNameMap();
+      const updatedCRS = new CRS();
       updatedCRS.init(crs);
 
       this.crsSubject.next(updatedCRS);
@@ -88,7 +88,7 @@ export class ApplicationSettingsService {
     }
   }
 
-  public subscribeToCRS(next: (crs: StationNameMap) => void): Subscription {
+  public subscribeToCRS(next: (crs: CRS) => void): Subscription {
     return this.crsSubject.subscribe(next);
   }
 
@@ -98,7 +98,7 @@ export class ApplicationSettingsService {
 
   private setCRS(): void {
     const crsString = localStorage.getItem('crs');
-    const crs = !crsString ? new StationNameMap() : StationNameMap.fromJS(JSON.parse(crsString));
+    const crs = !crsString ? new CRS() : CRS.fromJS(JSON.parse(crsString));
     if (!this.crsSubject.value || this.crsSubject.value !== crs) {
       this.crsSubject.next(crs);
     }

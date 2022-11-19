@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TrainServiceWrapper} from "../base/model/train-service-wrapper";
-import {TrainService} from "../../models/TrainService";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
+import {TrainService} from "../../core/services/gateway/ServicesApi/services-api.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-future-station-scroll',
@@ -14,6 +15,8 @@ export class FutureStationScrollComponent implements OnInit {
 
   public service: TrainService | null = null;
 
+  private subscriptions: Subscription[] = [];
+
   constructor(private huxleyTwoService: HuxleyTwoService) { }
 
   ngOnInit(): void {
@@ -24,7 +27,7 @@ export class FutureStationScrollComponent implements OnInit {
   }
 
   public getMoreInformationString() {
-    if (this.service) {
+    if (this.service != null) {
       return `Calling at ${FutureStationScrollComponent.getServiceStops(this.service)}. This train is formed of
       ${FutureStationScrollComponent.getNumberOfCoaches(this.service)} coaches`
     } else {
@@ -32,8 +35,10 @@ export class FutureStationScrollComponent implements OnInit {
     }
   }
 
-  private populateService(serviceIdUrlSafe: string): void {
-    this.service = this.huxleyTwoService.getService(serviceIdUrlSafe);
+  private populateService(url: string): void {
+    this.subscriptions.push(this.huxleyTwoService.getService(url).subscribe((service: TrainService) => {
+      this.service = service;
+    }));
   }
 
   private static getServiceStops(service: TrainService): string {
@@ -47,6 +52,11 @@ export class FutureStationScrollComponent implements OnInit {
   }
 
   private static getNumberOfCoaches(service: TrainService): number {
-    return service.formation.coaches.length;
+    if (service.formation != null || service.formation.coaches != null) {
+      return service.formation.coaches.length;
+    } else {
+      return 0;
+    }
+
   }
 }

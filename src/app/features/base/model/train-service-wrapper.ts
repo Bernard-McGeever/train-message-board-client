@@ -1,23 +1,19 @@
-import {Service} from "../../../models/Service";
-import {Station} from "../../../models/Station";
-import {Formation} from "../../../models/Formation";
-
 export class TrainServiceWrapper {
-  delayReason: string | null;
+  delayReason?: string | undefined;
   destination: string;
-  eta: string | null;
-  etd: string | null;
+  eta?: string | undefined;
+  etd?: string | undefined;
   isCancelled: boolean;
   operatorCode: string;
   origin: string;
-  platform: string | null;
+  platform?: string | undefined;
   serviceIdUrlSafe: string;
-  sta: string | null;
-  std: string | null;
+  sta?: string | undefined;
+  std?: string | undefined;
   moreInfoShown: boolean;
 
-  constructor(delayReason: string | null, destination: string, eta: string | null, etd: string | null, isCancelled: boolean, operatorCode: string,
-              origin: string, platform: string | null, serviceIdUrlSafe: string, sta: string | null, std: string | null, moreInfoShown: boolean) {
+  constructor(delayReason: string | undefined, destination: string, eta: string | undefined, etd: string | undefined, isCancelled: boolean, operatorCode: string,
+              origin: string, platform: string | undefined, serviceIdUrlSafe: string, sta: string | undefined, std: string | undefined, moreInfoShown: boolean) {
     this.delayReason = delayReason;
     this.destination = destination;
     this.eta = eta;

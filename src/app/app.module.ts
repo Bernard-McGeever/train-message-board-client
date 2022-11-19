@@ -14,6 +14,7 @@ import { FutureStationScrollComponent } from './features/future-station-scroll/f
 import { AdminMenuComponent } from './features/admin-menu/admin-menu.component';
 import {MatIconModule} from "@angular/material/icon";
 import { InformationModalComponent } from './shared/modals/information-modal/information-modal.component';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { InformationModalComponent } from './shared/modals/information-modal/inf
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

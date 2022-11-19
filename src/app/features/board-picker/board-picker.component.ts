@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {BoardType} from "../../models/Board.enum";
+import {Component, OnInit} from '@angular/core';
+import {BoardType} from "./models/Board.enum";
 import {HuxleyTwoService} from "../../service/huxley-two/huxley-two.service";
 import {BasePickerComponent} from "../base/base-picker/base-picker.component";
 
@@ -8,12 +8,16 @@ import {BasePickerComponent} from "../base/base-picker/base-picker.component";
   templateUrl: './board-picker.component.html',
   styleUrls: ['./board-picker.component.scss']
 })
-export class BoardPickerComponent extends BasePickerComponent<BoardType> {
+export class BoardPickerComponent extends BasePickerComponent<BoardType> implements OnInit {
 
   public currentBoard: BoardType = BoardType.DEPARTURES_AND_ARRIVALS;
 
   constructor(_huxleyTwoService: HuxleyTwoService) {
     super(_huxleyTwoService);
+  }
+
+  ngOnInit() {
+    this.populateOptions();
   }
 
   public onBoardOptionClicked(option: BoardType) {
