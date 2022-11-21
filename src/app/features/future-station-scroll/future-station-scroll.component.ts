@@ -29,7 +29,7 @@ export class FutureStationScrollComponent implements OnInit {
   public getMoreInformationString() {
     if (this.service != null) {
       return `Calling at ${FutureStationScrollComponent.getServiceStops(this.service)}. This train is formed of
-      ${FutureStationScrollComponent.getNumberOfCoaches(this.service)} coaches`
+      ${this.service.formation?.coaches?.length || ''} coaches`
     } else {
       return 'Apologies. No Information.'
     }
@@ -43,20 +43,11 @@ export class FutureStationScrollComponent implements OnInit {
 
   private static getServiceStops(service: TrainService): string {
     let callingPointsLocName: string[] = [];
-    service.subsequentCallingPoints.forEach(subCallingPoint => {
+    service.subsequentCallingPoints?.forEach(subCallingPoint => {
       subCallingPoint.callingPoint.forEach(cPoint => {
         callingPointsLocName.push(cPoint.locationName);
       });
     });
     return callingPointsLocName.join(", ");
-  }
-
-  private static getNumberOfCoaches(service: TrainService): number {
-    if (service.formation != null || service.formation.coaches != null) {
-      return service.formation.coaches.length;
-    } else {
-      return 0;
-    }
-
   }
 }
