@@ -19,15 +19,15 @@ export class MoreServiceInformationComponent implements OnInit {
   private subscriptions: Subscription[] = [];
 
   constructor(private shared: SharedService, private huxleyTwoService: HuxleyTwoService) {
-    this.serviceIdUrlSafeSubscription = shared.subscribeToServiceIdUrlSafeSubject((url: string) => {
-      this.headings = MoreServiceInformationComponent.populateHeadings();
-
-      this.initTrainService(url);
-      this.populateData(this.trainService);
-    });
+    this.headings = MoreServiceInformationComponent.populateHeadings();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.serviceIdUrlSafeSubscription = this.shared.subscribeToServiceIdUrlSafeSubject((url: string) => {
+
+      this.initTrainService(url);
+    });
+  }
 
   private static populateHeadings(): string[] {
     return ["Generated at", "Service type", "Location name", "CRS", "Operator", "RSID", "Is cancelled", "Cancel reason", "Delay reason",
@@ -37,6 +37,7 @@ export class MoreServiceInformationComponent implements OnInit {
   public initTrainService(url: string) {
     this.subscriptions.push(this.huxleyTwoService.getService(url).subscribe((trainService: TrainService) => {
       this.trainService = trainService;
+      this.populateData(this.trainService);
     }));
   }
 
