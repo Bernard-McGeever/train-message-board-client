@@ -15,10 +15,13 @@ import {IService} from "../../../core/services/gateway/DeparturesAndArrivalsApi/
 export abstract class BaseTableComponent implements OnInit, OnDestroy {
   public properties?: (keyof TrainServiceWrapper)[];
 
-  public currentServices?: TrainServiceWrapper[];
-  public filteredServices?: TrainServiceWrapper[];
+  public crs: CRS | null = null;
 
-  private crs: CRS | null = null;
+  public currentServices?: TrainServiceWrapper[];
+  public filteredServices?: TrainServiceWrapper[] = [];
+
+  public searchTerm: string;
+
   protected subscriptions: Subscription[] = [];
 
   protected constructor(public settings: ApplicationSettingsService, public shared: SharedService, public huxleyTwoService: HuxleyTwoService) { }
@@ -38,17 +41,13 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
   }
 
   public setIsServiceInformationShown(service: TrainServiceWrapper) {
-    this.currentServices?.forEach(service => service.moreInfoShown = false);
+    this.filteredServices?.forEach(service => service.moreInfoShown = false);
     service.moreInfoShown = !service.moreInfoShown;
   }
 
   public onServiceDbClicked(service: TrainServiceWrapper) {
     this.shared.setService(service.serviceIdUrlSafe);
   }
-
-  abstract populateCurrentServices(crs: CRS): void;
-
-  abstract populateProperties(): void;
 
   public static convertTrainServiceToWrapper(service: IService): TrainServiceWrapper {
     return new TrainServiceWrapper(
@@ -65,5 +64,19 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
       service.std,
       false);
   }
+
+  populateSearchTerm(term: string) {
+    this.searchTerm = term;
+    this.getSearchInfo();
+    this.populateCurrentServices(this.crs);
+  }
+
+  getSearchInfo() {
+    return `Filtered results by serch term ${this.searchTerm}.`;
+  }
+
+  abstract populateCurrentServices(crs: CRS): void;
+
+  abstract populateProperties(): void;
 }
 

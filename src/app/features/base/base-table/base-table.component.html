@@ -1,14 +1,15 @@
 <nav>
   <app-station-picker></app-station-picker>
   <app-board-picker></app-board-picker>
-  <app-search></app-search>
+  <p id="searchInfo" *ngIf="searchTerm">{{getSearchInfo()}}</p>
+  <app-search (searchTerms)="populateSearchTerm($event)"></app-search>
 </nav>
 
 <table>
   <tr>
     <th *ngFor="let property of properties">{{ property }}</th>
   </tr>
-  <ng-container *ngFor="let trainService of currentServices">
+  <ng-container *ngFor="let trainService of filteredServices">
     <tr (mouseover)="setIsServiceInformationShown(trainService)" (dblclick)="onServiceDbClicked(trainService)">
       <td *ngFor="let property of properties">{{ trainService[property] }}</td>
     </tr>

@@ -1,5 +1,5 @@
 <div class="modal-content" *ngIf="trainService">
-  <h1>{{this.trainService.rsid}}</h1>
+  <h1>{{this.trainService.rsid ? this.trainService.rsid : 'unknown'}}</h1>
   <table *ngIf="data; else noData">
     <tr *ngFor="let heading of this.headings; index as i">
       <th>{{heading}}: </th>

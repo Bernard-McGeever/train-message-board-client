@@ -13,7 +13,6 @@ import { MoreServiceInformationComponent } from './features/more-service-informa
 import { FutureStationScrollComponent } from './features/future-station-scroll/future-station-scroll.component';
 import { AdminMenuComponent } from './features/admin-menu/admin-menu.component';
 import {MatIconModule} from "@angular/material/icon";
-import { InformationModalComponent } from './shared/modals/information-modal/information-modal.component';
 import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
@@ -28,7 +27,6 @@ import {HttpClientModule} from "@angular/common/http";
     MoreServiceInformationComponent,
     FutureStationScrollComponent,
     AdminMenuComponent,
-    InformationModalComponent,
   ],
   imports: [
     BrowserModule,

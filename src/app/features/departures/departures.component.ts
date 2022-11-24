@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { ApplicationSettingsService } from "../../core/services/application-settings/application-settings.service";
 import { HuxleyTwoService } from "../../service/huxley-two/huxley-two.service";
 import { BaseTableComponent } from "../base/base-table/base-table.component";
-import {SharedService} from "../../core/services/shared/shared.service";
-import {CRS} from "../../core/services/gateway/CrsApi/crs-api.service";
-import {DeparturesAndArrivals, DeparturesAndArrivalsApi} from "../../core/services/gateway/DeparturesAndArrivalsApi/departures-and-arrivals-api";
+import { SharedService } from "../../core/services/shared/shared.service";
+import { CRS } from "../../core/services/gateway/CrsApi/crs-api.service";
+import { DeparturesAndArrivals } from "../../core/services/gateway/DeparturesAndArrivalsApi/departures-and-arrivals-api";
 
 @Component({
   selector: 'app-departures',
@@ -18,10 +18,26 @@ export class DeparturesComponent extends BaseTableComponent {
   }
 
   populateCurrentServices(crs: CRS): void {
-    this.subscriptions.push(this.huxleyTwoService.getDepartures(crs).subscribe((departuresAndArrivals: DeparturesAndArrivals) => {
-      this.currentServices = departuresAndArrivals.trainServices.map(service => {
-        return BaseTableComponent.convertTrainServiceToWrapper(service);
-      });
+    this.subscriptions.push(this.huxleyTwoService.getDeparturesAndArrivals(crs).subscribe((departuresAndArrivals: DeparturesAndArrivals) => {
+      if (this.searchTerm) {
+        this.filteredServices = [];
+        this.currentServices = departuresAndArrivals.trainServices.map(service => {
+          return BaseTableComponent.convertTrainServiceToWrapper(service);
+        });
+        this.currentServices.forEach(trainService => {
+          this.huxleyTwoService.getService(trainService.serviceIdUrlSafe).subscribe(service => {
+            service.subsequentCallingPoints?.forEach(subsequentCallingPoint => subsequentCallingPoint.callingPoint.some(callingPoint => {
+              if (callingPoint.locationName.toLowerCase().trim().includes(this.searchTerm.toLowerCase().trim())) {
+                this.filteredServices.push(trainService);
+              }
+            }));
+          });
+        });
+      } else {
+        this.filteredServices = departuresAndArrivals.trainServices.map(service => {
+          return BaseTableComponent.convertTrainServiceToWrapper(service);
+        });
+      }
     }));
   }
 

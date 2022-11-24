@@ -10,7 +10,7 @@ import {BasePickerComponent} from "../base/base-picker/base-picker.component";
 })
 export class BoardPickerComponent extends BasePickerComponent<BoardType> implements OnInit {
 
-  public currentBoard: BoardType = BoardType.DEPARTURES_AND_ARRIVALS;
+  public currentBoard: BoardType;
 
   constructor(_huxleyTwoService: HuxleyTwoService) {
     super(_huxleyTwoService);
@@ -28,12 +28,14 @@ export class BoardPickerComponent extends BasePickerComponent<BoardType> impleme
   }
 
   public convertBoardOptionToLink(option: BoardType): string {
-    const link = '/' + option.toLowerCase().replace('_', '-');
-    console.log(link)
     return '/' + option.toLowerCase().replace('_', '-');
   }
 
   populateOptions(): void {
-    this.options = this.huxleyTwoService.getBoardOptions().filter(board => board !== this.currentBoard);
+    this.options = [
+      BoardType.DEPARTURES_AND_ARRIVALS,
+      BoardType.DEPARTURES,
+      BoardType.ARRIVALS
+    ];
   }
 }

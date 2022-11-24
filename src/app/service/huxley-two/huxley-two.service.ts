@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {BoardType} from "../../features/board-picker/models/Board.enum";
 import {CRS, CrsApiService} from "../../core/services/gateway/CrsApi/crs-api.service";
 import {DeparturesAndArrivalsApi} from "../../core/services/gateway/DeparturesAndArrivalsApi/departures-and-arrivals-api";
 import {ServicesApi} from "../../core/services/gateway/ServicesApi/services-api.service";
@@ -25,14 +24,6 @@ export class HuxleyTwoService {
 
   public getCRSOptions() {
     return this.crsApi.getCrs();
-  }
-
-  public getBoardOptions() {
-    return [
-      BoardType.DEPARTURES_AND_ARRIVALS,
-      BoardType.DEPARTURES,
-      BoardType.ARRIVALS
-    ];
   }
 
   public getService(serviceIdUrlSafe: string) {
