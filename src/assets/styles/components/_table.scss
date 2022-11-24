@@ -9,7 +9,9 @@
       color: var(--text-heading-color);
       position: absolute;
       top: 53px;
-      left: 725px;
+      left: 50%;
+      transform: translateX(-50%);
+
     }
   }
 

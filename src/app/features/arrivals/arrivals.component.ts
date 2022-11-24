@@ -26,7 +26,7 @@ export class ArrivalsComponent extends BaseTableComponent {
         });
         this.currentServices.forEach(trainService => {
           this.huxleyTwoService.getService(trainService.serviceIdUrlSafe).subscribe(service => {
-            service.previousCallingPoints?.forEach(previousCallingPoint => previousCallingPoint.callingPoint.some(callingPoint => {
+            service.previousCallingPoints?.forEach(previousCallingPoint => previousCallingPoint.callingPoint.find(callingPoint => {
               if (callingPoint.locationName.toLowerCase().trim().includes(this.searchTerm.toLowerCase().trim())) {
                 this.filteredServices.push(trainService);
               }
