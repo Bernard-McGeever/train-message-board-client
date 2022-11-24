@@ -7,7 +7,7 @@
 
 <table>
   <tr>
-    <th *ngFor="let property of properties">{{ property }}</th>
+    <th *ngFor="let property of properties">{{ property | lowerCamelToUpper }}</th>
   </tr>
   <ng-container *ngFor="let trainService of filteredServices">
     <tr (mouseover)="setIsServiceInformationShown(trainService)" (dblclick)="onServiceDbClicked(trainService)">

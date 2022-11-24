@@ -14,6 +14,8 @@ import { FutureStationScrollComponent } from './features/future-station-scroll/f
 import { AdminMenuComponent } from './features/admin-menu/admin-menu.component';
 import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
+import {TitleCasePipe} from "@angular/common";
+import { LowerCamelToUpperPipe } from './pipes/lower-camel-to-title/lower-camel-to-upper.pipe';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {HttpClientModule} from "@angular/common/http";
     MoreServiceInformationComponent,
     FutureStationScrollComponent,
     AdminMenuComponent,
+    LowerCamelToUpperPipe,
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,7 @@ import {HttpClientModule} from "@angular/common/http";
     MatIconModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [TitleCasePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
