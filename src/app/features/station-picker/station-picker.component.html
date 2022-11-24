@@ -1,4 +1,4 @@
-<input list="crsDataList" id="crs" (change)="onStationOptionSelected($event)">
+<input list="crsDataList" id="crs"  placeholder="{{this.currentStation.crsCode}}" (change)="onStationOptionSelected($event)">
 <datalist id="crsDataList">
   <option *ngFor="let option of options" [value]="option.crsCode">{{option.stationName}}</option>
 </datalist>

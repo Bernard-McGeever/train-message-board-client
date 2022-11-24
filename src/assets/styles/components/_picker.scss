@@ -7,6 +7,7 @@
     top: $top;
     left: $left;
     right: $right;
+    z-index: 1000;
   }
 
   button {
@@ -49,6 +50,7 @@
     top: $top;
     left: $left;
     right: $right;
+    z-index: 1000;
   }
 
   input {
@@ -61,5 +63,9 @@
 
     padding: 5px 5px 5px 5px;
     border: none;
+  }
+
+  ::placeholder {
+    color: var(--text-color);
   }
 }
