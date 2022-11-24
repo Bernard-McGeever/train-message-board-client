@@ -11,6 +11,7 @@ import {BasePickerComponent} from "../base/base-picker/base-picker.component";
 export class BoardPickerComponent extends BasePickerComponent<BoardType> implements OnInit {
 
   public currentBoard: BoardType;
+  public dropDownIsShown: boolean = false;
 
   constructor(_huxleyTwoService: HuxleyTwoService) {
     super(_huxleyTwoService);
@@ -37,5 +38,9 @@ export class BoardPickerComponent extends BasePickerComponent<BoardType> impleme
       BoardType.DEPARTURES,
       BoardType.ARRIVALS
     ];
+  }
+
+  public showHideOptions(): void {
+    this.dropDownIsShown = !this.dropDownIsShown;
   }
 }

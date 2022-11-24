@@ -1,6 +1,6 @@
 @use "src/assets/styles/abstracts" as a;
 
-@mixin importPickerStyles($bottom, $top, $left, $right, $size) {
+@mixin importBoardPickerStyles($bottom, $top, $left, $right, $size) {
   :host {
     position: absolute;
     bottom: $bottom;
@@ -39,5 +39,27 @@
       font-family: a.$train-font;
       padding: 5px 0 5px 5px;
     }
+  }
+}
+
+@mixin importStationPickerStyles($bottom, $top, $left, $right, $size) {
+  :host {
+    position: absolute;
+    bottom: $bottom;
+    top: $top;
+    left: $left;
+    right: $right;
+  }
+
+  input {
+    @include a.clickable(var(--bg-text-display), var(--text-color));
+
+    font-size: $size;
+    font-family: a.$train-font;
+    width: 100%;
+    height: 50px;
+
+    padding: 5px 5px 5px 5px;
+    border: none;
   }
 }

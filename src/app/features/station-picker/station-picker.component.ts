@@ -28,9 +28,11 @@ export class StationPickerComponent extends BasePickerComponent<CRS> implements 
     }))
   }
 
-  public onStationOptionClicked(option: CRS) {
-    this.currentStation = option;
+  public onStationOptionSelected(event) {
+    let crsCode = event.target.value;
+    this.currentStation = this.options.filter(option => option.crsCode === crsCode)[0];
+
     this.settings.currentCRS = this.currentStation;
-    this.showHideOptions();
   }
+
 }

@@ -1,7 +1,5 @@
-<button (click)="showHideOptions()">{{ currentStation.stationName }}</button>
-<div class="picker-drop-down" *ngIf="this.dropDownIsShown">
-  <ul *ngFor="let option of options">
-    <li (click)="onStationOptionClicked(option)">{{ option.stationName }}</li>
-  </ul>
-</div>
+<input list="crsDataList" id="crs" (change)="onStationOptionSelected($event)">
+<datalist id="crsDataList">
+  <option *ngFor="let option of options" [value]="option.crsCode">{{option.stationName}}</option>
+</datalist>
 
