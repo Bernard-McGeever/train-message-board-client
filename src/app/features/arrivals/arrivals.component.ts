@@ -19,16 +19,16 @@ export class ArrivalsComponent extends BaseTableComponent {
 
   populateCurrentServices(crs: CRS): void {
     this.subscriptions.push(this.huxleyTwoService.getDeparturesAndArrivals(crs).subscribe((departuresAndArrivals: DeparturesAndArrivals) => {
+      this.currentServices = departuresAndArrivals.trainServices.map(service => {
+        return BaseTableComponent.convertTrainServiceToWrapper(service);
+      });
+      this.filteredServices = [];
       if (this.searchTerm) {
-        this.filteredServices = [];
-        this.currentServices = departuresAndArrivals.trainServices.map(service => {
-          return BaseTableComponent.convertTrainServiceToWrapper(service);
-        });
         this.currentServices.forEach(trainService => {
           this.huxleyTwoService.getService(trainService.serviceIdUrlSafe).subscribe(service => {
-            service.previousCallingPoints?.forEach(previousCallingPoint => previousCallingPoint.callingPoint.find(callingPoint => {
+            service.previousCallingPoints?.forEach(previousCallingPoint => previousCallingPoint.callingPoint.some(callingPoint => {
               if (callingPoint.locationName.toLowerCase().trim().includes(this.searchTerm.toLowerCase().trim())) {
-                if (!this.filteredServices.includes(trainService)) {
+                if (!(this.filteredServices.includes(trainService))) {
                   this.filteredServices.push(trainService);
                 }
               }
@@ -36,9 +36,7 @@ export class ArrivalsComponent extends BaseTableComponent {
           });
         });
       } else {
-        this.filteredServices = departuresAndArrivals.trainServices?.map(service => {
-          return BaseTableComponent.convertTrainServiceToWrapper(service);
-        });
+        this.filteredServices = this.currentServices;
       }
     }));
   }
