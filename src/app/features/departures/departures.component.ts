@@ -34,7 +34,7 @@ export class DeparturesComponent extends BaseTableComponent {
           });
         });
       } else {
-        this.filteredServices = departuresAndArrivals.trainServices.map(service => {
+        this.filteredServices = departuresAndArrivals.trainServices?.map(service => {
           return BaseTableComponent.convertTrainServiceToWrapper(service);
         });
       }

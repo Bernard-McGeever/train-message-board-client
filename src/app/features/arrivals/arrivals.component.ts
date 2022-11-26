@@ -28,13 +28,15 @@ export class ArrivalsComponent extends BaseTableComponent {
           this.huxleyTwoService.getService(trainService.serviceIdUrlSafe).subscribe(service => {
             service.previousCallingPoints?.forEach(previousCallingPoint => previousCallingPoint.callingPoint.find(callingPoint => {
               if (callingPoint.locationName.toLowerCase().trim().includes(this.searchTerm.toLowerCase().trim())) {
-                this.filteredServices.push(trainService);
+                if (!this.filteredServices.includes(trainService)) {
+                  this.filteredServices.push(trainService);
+                }
               }
             }));
           });
         });
       } else {
-        this.filteredServices = departuresAndArrivals.trainServices.map(service => {
+        this.filteredServices = departuresAndArrivals.trainServices?.map(service => {
           return BaseTableComponent.convertTrainServiceToWrapper(service);
         });
       }

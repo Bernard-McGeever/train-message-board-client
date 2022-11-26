@@ -1,6 +1,6 @@
 @use "src/assets/styles/abstracts" as a;
 
-@mixin importBoardPickerStyles($bottom, $top, $left, $right, $size) {
+@mixin importPickerStyles($bottom, $top, $left, $right, $size) {
   :host {
     position: absolute;
     bottom: $bottom;
@@ -10,50 +10,7 @@
     z-index: 1000;
   }
 
-  button {
-    @include a.clickable(var(--bg-text-display), var(--text-color));
-
-    font-size: $size;
-    font-family: a.$train-font;
-    width: 100%;
-    height: 50px;
-
-    padding: 5px 5px 5px 5px;
-    border: none;
-  }
-
-  .picker-drop-down {
-    z-index: 5;
-    background-color: var(--bg-text-display);
-    max-height: 400px;
-    overflow: auto;
-
-    ul {
-      list-style-type: none;
-      padding: 0;
-    }
-
-    li {
-      @include a.clickable(var(--bg-text-display), var(--text-color));
-
-      list-style-type: none;
-      font-family: a.$train-font;
-      padding: 5px 0 5px 5px;
-    }
-  }
-}
-
-@mixin importStationPickerStyles($bottom, $top, $left, $right, $size) {
-  :host {
-    position: absolute;
-    bottom: $bottom;
-    top: $top;
-    left: $left;
-    right: $right;
-    z-index: 1000;
-  }
-
-  input {
+  input, select {
     @include a.clickable(var(--bg-text-display), var(--text-color));
 
     font-size: $size;
