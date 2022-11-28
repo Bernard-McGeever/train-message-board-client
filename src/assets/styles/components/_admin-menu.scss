@@ -39,7 +39,7 @@
       list-style-type: none;
       padding: 0;
 
-      li {
+      li, a {
         @include a.clickable(var(--bg-text-display), var(--text-color));
 
         font-size: small;

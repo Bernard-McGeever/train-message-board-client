@@ -72,7 +72,7 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
   }
 
   getSearchInfo() {
-    return `Filtered results by serch term ${this.searchTerm}.`;
+    return `Filtered results by search term '${this.searchTerm}'.`;
   }
 
   abstract populateCurrentServices(crs: CRS): void;
