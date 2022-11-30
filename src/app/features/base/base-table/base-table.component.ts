@@ -24,7 +24,7 @@ export abstract class BaseTableComponent implements OnInit, OnDestroy {
 
   protected subscriptions: Subscription[] = [];
 
-  protected constructor(public settings: ApplicationSettingsService, public shared: SharedService, public huxleyTwoService: HuxleyTwoService) { }
+  protected constructor(private settings: ApplicationSettingsService, public shared: SharedService, public huxleyTwoService: HuxleyTwoService) { }
 
   ngOnInit(): void {
     this.populateProperties();

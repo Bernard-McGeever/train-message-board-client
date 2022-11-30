@@ -11,7 +11,7 @@ import { DeparturesAndArrivals } from "../../core/services/gateway/DeparturesAnd
   templateUrl: '../base/base-table/base-table.component.html',
   styleUrls: ['../base/base-table/base-table.component.scss']
 })
-export class DeparturesAndArrivalsComponent  extends BaseTableComponent {
+export class DeparturesAndArrivalsComponent extends BaseTableComponent {
 
   constructor(_settings: ApplicationSettingsService, _shared: SharedService, _huxleyTwoService: HuxleyTwoService) {
     super(_settings, _shared, _huxleyTwoService);
